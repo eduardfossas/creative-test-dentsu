@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
-  
   "dependencies": {
     "@next/font": "13.0.7",
+    "@react-three/drei": "^9.47.1",
     "@react-three/fiber": "^8.9.1",
     "@types/three": "^0.146.0",
     "eslint": "8.30.0",
