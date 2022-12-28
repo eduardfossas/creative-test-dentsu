@@ -29,7 +29,7 @@ export const vertex =
         
         float distanceToCenter = distance(vec2(pos.x, pos.y), center);
 
-        vec3 transform = mix(pos, fromSpherical(r, phi, theta), vec3(1., 1.0, 1.));
+        vec3 transform = mix(pos, fromSpherical(r, phi, theta), vec3(1., 1.0, -0.5));
 
         transform.x *= noise * frequency * uWaveHeight;
         vec4 viewPosition = viewMatrix * modelMatrix * vec4(pos, 1.0);
