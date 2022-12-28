@@ -16,7 +16,7 @@ const AudioPlane = ({ color, waveHeight }) => {
       uTime: 0,
       uDataArr: 10000,
       uColor: new THREE.Color("hotpink"),
-      uPixelRatio: Math.min(1, 2),
+      uPixelRatio: Math.min(1, window.devicePixelRatio),
       uWaveHeight: 1,
     },
     resolveLygia(vertex),

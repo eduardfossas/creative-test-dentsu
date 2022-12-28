@@ -19,17 +19,13 @@ export const vertex =
       }
 
       void main() {
-        vec2 center = vec2(0.5);
         float frequency = smoothstep(0., 1.0, uDataArr / 10000.);
         float noise = pnoise(vec2(position.x, position.y * 3.)  + uTime, vec2(0.0, 0.0));
         float phi = (1. - uv.y) * PI;
         float theta = uv.x * PI * 0.15 + PI + 1.;
         vec3 pos = vec3(position);
         float r = 1.;
-        
-        float distanceToCenter = distance(vec2(pos.x, pos.y), center);
-
-        vec3 transform = mix(pos, fromSpherical(r, phi, theta), vec3(1., 1.0, -0.5));
+        vec3 transform = mix(pos, fromSpherical(r, phi, theta), vec3(1.0, 1.0, -0.5));
 
         transform.x *= noise * frequency * uWaveHeight;
         vec4 viewPosition = viewMatrix * modelMatrix * vec4(pos, 1.0);
