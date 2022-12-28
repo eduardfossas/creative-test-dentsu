@@ -2,8 +2,9 @@ import styled from "styled-components";
 import Logo from "assets/svg/dentsu-logo.svg";
 import MenuSvg from "assets/svg/menu.svg";
 import { Wave } from "components/Wave";
+import { motion } from "framer-motion";
 
-const Container = styled.header`
+const Container = styled(motion.header)`
   width: 100%;
   position: absolute;
   color: #fff;
@@ -24,7 +25,10 @@ const LogoWrapper = styled.div`
 
 const Header = ({ isStarted }) => {
   return (
-    <Container>
+    <Container
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { delay: 0.65 } }}
+    >
       <Navigation>
         <div>
           <MenuSvg />
