@@ -29,7 +29,7 @@ const StartButton = ({ setIsStarted }) => {
     setIsStarted(true);
     play();
   };
-  return <Button onClick={handlePlay}>Start</Button>;
+  return <Button onClick={handlePlay}>Start Experience</Button>;
 };
 
 export { StartButton };

@@ -11,7 +11,7 @@ const AudioSphere = () => {
     {
       uTime: 0.0,
       uColor: new THREE.Color("#EA001C"),
-      uPixelRatio: Math.min(1, window.devicePixelRatio),
+      uPixelRatio: Math.round(Math.min(window.devicePixelRatio, 2)),
     },
     resolveLygia(`
     varying vec3 vNormal; 
@@ -32,7 +32,7 @@ const AudioSphere = () => {
     void main() {
   
       float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
-        float strength = 0.01 / distanceToCenter - 0.01 * 2.;
+        float strength = 0.01 / distanceToCenter - 0.01 * 2.5;
         gl_FragColor = vec4(vec3(uColor), strength);
     }
   `)
