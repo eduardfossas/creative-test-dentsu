@@ -1,8 +1,7 @@
-import { useMemo, useEffect, useRef, useState } from "react";
-
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
-import { Canvas, extend } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Scene } from "components/Scene";
 import { Intro } from "components/Intro";

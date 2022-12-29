@@ -1,7 +1,6 @@
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
-import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
 import { vertexSphere, fragment } from "components/Protons/Shaders";
 import { extend } from "@react-three/fiber";

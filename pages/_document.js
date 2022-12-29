@@ -1,4 +1,3 @@
-import { Html, Head, Main, NextScript } from "next/document";
 import Document from "next/document";
 
 import { ServerStyleSheet } from "styled-components";

@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
-import { resolveLygia } from "resolve-lygia";
 import { extend, useFrame } from "@react-three/fiber";
 
 const AudioSphere = () => {
@@ -13,7 +12,7 @@ const AudioSphere = () => {
       uColor: new THREE.Color("#EA001C"),
       uPixelRatio: Math.round(Math.min(window.devicePixelRatio, 2)),
     },
-    resolveLygia(`
+    `
     varying vec3 vNormal; 
     uniform float uTime;
     uniform float uPixelRatio;
@@ -25,8 +24,8 @@ const AudioSphere = () => {
       gl_PointSize *= (1.0 / - viewPosition.z);
       vNormal = normal;
     }
-  `),
-    resolveLygia(`
+  `,
+    `
     varying vec3 vNormal;
     uniform vec3 uColor;
     void main() {
@@ -35,7 +34,7 @@ const AudioSphere = () => {
         float strength = 0.01 / distanceToCenter - 0.01 * 2.5;
         gl_FragColor = vec4(vec3(uColor), strength);
     }
-  `)
+  `
   );
 
   extend({ CustomShader });
