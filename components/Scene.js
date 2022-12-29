@@ -6,6 +6,7 @@ import { useFrame } from "@react-three/fiber";
 
 import { AudioSphere } from "components/AudioSphere";
 import { AudioPlane } from "components/AudioPlane";
+import { Protons } from "components/Protons";
 
 const Scene = () => {
   const sceneRef = useRef();
@@ -15,12 +16,12 @@ const Scene = () => {
       sceneRef.current.position.x = THREE.MathUtils.lerp(
         sceneRef.current.position.x,
         state.mouse.x * 0.05,
-        0.1
+        0.05
       );
       sceneRef.current.position.y = THREE.MathUtils.lerp(
         sceneRef.current.position.y,
         state.mouse.y * 0.05,
-        0.1
+        0.05
       );
     }
   });
@@ -38,6 +39,7 @@ const Scene = () => {
         position={[0, -2, 0]}
         fadeStrength={10}
       />
+      <Protons />
     </group>
   );
 };
