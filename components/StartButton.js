@@ -1,5 +1,5 @@
 import { AudioContext } from "contexts/AudioContext";
-import { useContext } from "react";
+import { useContext, useLayoutEffect } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -29,6 +29,7 @@ const StartButton = ({ setIsStarted }) => {
     setIsStarted(true);
     play();
   };
+
   return <Button onClick={handlePlay}>Start Experience</Button>;
 };
 

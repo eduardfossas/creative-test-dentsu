@@ -9,12 +9,17 @@ import { AudioContext } from "contexts/AudioContext";
 
 const AudioPlane = ({ color, waveHeight }) => {
   const waveMaterial = useRef();
-  const { analyser, dataArray } = useContext(AudioContext);
+  const { analyser, dataArray, volumeData } = useContext(AudioContext);
+  let target = 0;
+  let current = 0;
+  const upEasing = 0.1;
+  const downEasing = 0.02;
 
   const PlaneShader = shaderMaterial(
     {
       uTime: 0,
       uDataArr: 10000,
+      uDisplacementStrength: 0.2,
       uColor: new THREE.Color("hotpink"),
       uPixelRatio: Math.round(Math.min(window.devicePixelRatio, 2)),
       uWaveHeight: 1,
@@ -27,13 +32,25 @@ const AudioPlane = ({ color, waveHeight }) => {
 
   useFrame(({ clock }) => {
     waveMaterial.current.uTime = clock.getElapsedTime() / 1.2;
-
     if (!analyser?.current) return;
-
+    analyser?.current?.getFloatTimeDomainData(volumeData.current);
     analyser?.current?.getByteFrequencyData(dataArray.current);
 
-    if (!dataArray.current) return;
+    if (!(dataArray.current && volumeData.current)) return;
 
+    let sumSquares = 0.0;
+    let volume;
+    for (const amplitude of volumeData.current) {
+      sumSquares += amplitude * amplitude;
+    }
+
+    volume = Math.sqrt(sumSquares / volumeData.current.length);
+
+    target = volume;
+    const easing = target > current ? upEasing : downEasing;
+    current += (target - current) * easing;
+
+    waveMaterial.current.uDisplacementStrength = current;
     waveMaterial.current.uDataArr = dataArray.current.reduce(
       (partialSum, a) => partialSum + a,
       0
