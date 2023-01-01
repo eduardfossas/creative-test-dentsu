@@ -1,5 +1,5 @@
 import { AudioContext } from "contexts/AudioContext";
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -24,11 +24,25 @@ const Button = styled.button`
 `;
 
 const StartButton = ({ setIsStarted }) => {
-  const { play } = useContext(AudioContext);
-  const handlePlay = () => {
+  const { play, audioContext } = useContext(AudioContext);
+  const timeout = useRef();
+  const handlePlay = useCallback(() => {
     setIsStarted(true);
     play();
-  };
+  }, [play, setIsStarted]);
+
+  useLayoutEffect(() => {
+    document.body.addEventListener("click", () => {
+      handlePlay();
+    });
+    document.body.click();
+
+    timeout.current = setTimeout(() => {
+      audioContext.current.resume();
+    }, 100);
+
+    return () => clearTimeout(timeout.current);
+  }, [audioContext, handlePlay]);
 
   return <Button onClick={handlePlay}>Start Experience</Button>;
 };

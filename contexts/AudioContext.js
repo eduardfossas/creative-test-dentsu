@@ -5,5 +5,6 @@ export const AudioContext = createContext({
   dataArray: [],
   volumeData: [],
   isReady: false,
+  audioContext: false,
   play: () => {},
 });
