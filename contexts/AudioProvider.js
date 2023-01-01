@@ -24,7 +24,7 @@ const AudioProvider = ({ children }) => {
 
   const play = () => {
     if (!analyser.current) {
-      setupAudioContext();
+      setupAudioContext().then(() => audioContext.current.resume());
     }
   };
 
